@@ -6,7 +6,7 @@
 #    By: gvirga <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/12 23:31:55 by gvirga            #+#    #+#              #
-#    Updated: 2019/04/15 05:02:17 by gvirga           ###   ########.fr        #
+#    Updated: 2019/04/15 07:06:29 by gvirga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,19 +67,21 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	rm -f program.trace
 	touch program.trace
-	@echo "$(YELLOW)Checking updates in the libs$(END)"
-	@make -C $(LIBFT_DIR)
-	@cp $(LIBFT_DIR)libft.a libs/
-	@echo "$(CYAN)Building the fdf executable$(END)"
+	@echo "$(CYAN)Building the $(NAME) executable$(END)"
 	gcc $(CFLAGS) -o $@$(OBJ) $(LIBSPATH) $(FRAMEWORKS_CMD)
 	@echo "$(GREEN)SUCCESS$(END)"
 
 $(OBJ): $(SRCFILES) $(MAIN)
+	@echo "$(YELLOW)Checking updates in the libs$(END)"
+	@make -C $(LIBFT_DIR)
+	@cp $(LIBFT_DIR)libft.a libs/
+	@cp $(LIBFT_DIR)/includes/libft.h INC_DIR
 	@echo "$(CYAN)Compilation of source files for $(NAME) executable...$(END)"
 	@$(CC) $(CFLAGS) $(MAIN) -c $(SRCFILES) -I $(INC_DIR)
 
 clean:
 	@rm -Rf $(OBJ)
+	@make --no-print-directory -C $(LIBFT_DIR) clean
 	@echo "$(RED)Suppression$(END) of source files for $(CYAN)$(NAME)$(END)..."
 
 fclean: clean
