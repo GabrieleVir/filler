@@ -6,7 +6,7 @@
 #    By: gvirga <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/12 23:31:55 by gvirga            #+#    #+#              #
-#    Updated: 2019/04/15 07:06:29 by gvirga           ###   ########.fr        #
+#    Updated: 2019/06/07 22:40:56 by gvirga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,16 +18,17 @@ LIBS =libft.a
 LIBSDIR=libs/
 LIBSPATH =$(addprefix $(LIBSDIR), $(LIBS))
 SRCDIR=srcs/
-CC =gcc
-CFLAGS =
+CC = gcc
+CFLAGS = -fsanitize=address -g
 MAIN =main.c
-FILES =
+FILES =strerror_manager.c errors_parser.c info_player.c read_sogp.c \
+	   init_variables.c get_piece.c piece_size.c fill_map.c
 SRCFILES =$(addprefix $(SRCDIR), $(FILES))
 OBJ=$(subst .c,.o, $(FILES)) main.o
 SRCOBJ =$(addprefix $(SRCDIR), $(OBJ))
 INC_DIR =./includes/
 LFLAGS =rc
-FRAMEWORKS=appkit opengl
+FRAMEWORKS=
 FRAMEWORKS_CMD=$(addprefix -framework , $(FRAMEWORKS))
 OBJ2=ft_putchar.o ft_putchar_fd.o ft_putstr.o ft_putstr_fd.o ft_putendl.o \
 ft_putendl_fd.o ft_memcpy.o ft_putwchar.o ft_putwstr.o \
@@ -48,7 +49,7 @@ ft_lstiter.o ft_lstmap.o ft_lstcpy.o ft_wordcount.o ft_atol.o ft_push_back.o \
 ft_strnboccur.o ft_strjoin_free.o ft_ipower.o ft_npower.o ft_rchr.o \
 ft_nbdigit.o ft_strjoin_freei.o ft_strnew_free.o ft_strsub_free.o \
 ft_strdup_free.o ft_putlstr.o ft_memljoin.o ft_llnbdigit.o ft_bigpower.o \
-ft_ftoa.o ft_round_str_double.o
+ft_ftoa.o ft_round_str_double.o get_next_line.o
 SRCOBJ2 =$(addprefix tmp_obj/, $(OBJ2))
 SRCFILES2 =$(subst .c, .o, $(SRCOBJ2))
 
@@ -75,7 +76,7 @@ $(OBJ): $(SRCFILES) $(MAIN)
 	@echo "$(YELLOW)Checking updates in the libs$(END)"
 	@make -C $(LIBFT_DIR)
 	@cp $(LIBFT_DIR)libft.a libs/
-	@cp $(LIBFT_DIR)/includes/libft.h INC_DIR
+	@cp $(LIBFT_DIR)/includes/libft.h $(INC_DIR)
 	@echo "$(CYAN)Compilation of source files for $(NAME) executable...$(END)"
 	@$(CC) $(CFLAGS) $(MAIN) -c $(SRCFILES) -I $(INC_DIR)
 
