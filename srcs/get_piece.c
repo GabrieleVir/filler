@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:22:50 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/07 22:46:50 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/11 15:21:36 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int		piece_no_newline(t_filler_info **info, t_parser **parser)
 
 	u = -1;
 	i = 0;
-	ft_putstr_fd("test2\n", (*parser)->fd);
 	if (!(tmp = ft_strdup((*info)->sogp)))
 		return (0);
 	free((*info)->sogp);
@@ -53,7 +52,6 @@ static int		piece_no_newline(t_filler_info **info, t_parser **parser)
 	(*info)->sogp = ft_strnew((*info)->piece_cols * (*info)->piece_rows);
 	if (!(*info)->sogp)
 		return (0);
-	ft_putstr_fd("test1\n", (*parser)->fd);
 	while (tmp[++u])
 	{
 		if (tmp[u] == '*' || tmp[u] == '.')
@@ -62,7 +60,6 @@ static int		piece_no_newline(t_filler_info **info, t_parser **parser)
 			i++;
 		}
 	}
-	ft_putstr_fd("test3\n", (*parser)->fd);
 	free(tmp);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 19:26:11 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/07 21:58:07 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/11 15:49:14 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static int	add_col_or_row(t_place *c, int *pos, t_filler_info **info, t_parser *
 	{
 		if (((*pos) + (*info)->nb_cols) /
 				(*info)->nb_cols < (*info)->nb_cols)
-			(*pos) += (*info)->nb_cols - (*info)->piece_cols + 1;
+		{
+			(*pos) += (*info)->nb_cols;
+			(*pos) -= (*info)->piece_cols - 1;
+		}
 		else
 			return (0);
 	}
@@ -59,6 +62,7 @@ static int	check_if_fit(t_filler_info **info, t_parser **parser, t_place c)
 		if (!result || contact > 1)
 			return (0);
 	}
+	ft_putnbr_fd(contact, (*parser)->fd);
 	return (1);
 }
 
@@ -77,16 +81,15 @@ static int	is_placable(t_filler_info **info, t_parser **parser)
 	(*info)->return_values[1] = (*info)->pos % (*info)->nb_cols;
 	(*info)->contact_pos[0] = (*info)->return_values[0];
 	(*info)->contact_pos[1] = (*info)->return_values[1];
-	ft_putnbr_fd((*info)->pos, (*parser)->fd);
-	ft_putstr_fd("\n", (*parser)->fd);
 	while (((*info)->sogp)[coords.i] && ((*info)->sogp)[coords.i] != '*')
 	{
-		if (coords.i != 0 &&
-			coords.i % (*info)->piece_cols == (*info)->piece_cols - 1)
+		if (coords.i != 0 && coords.i % (*info)->piece_cols == (*info)->piece_cols - 1)
 		{
 			if ((*info)->return_values[0] > 0)
 			{
 				(*info)->return_values[0] -= 1;
+				(*info)->return_values[1] += (*info)->piece_cols - 1;
+				pos += (*info)->piece_cols - 1;
 				pos -= (*info)->nb_cols;
 			}
 			else
@@ -102,10 +105,8 @@ static int	is_placable(t_filler_info **info, t_parser **parser)
 			else
 				return (0);
 		}
-		(coords.i)++;
+		coords.i++;
 	}
-	ft_putnbr_fd(pos, (*parser)->fd);
-	ft_putstr_fd("\n", (*parser)->fd);
 	if (check_if_fit(info, parser, coords))
 		return (1);
 	else

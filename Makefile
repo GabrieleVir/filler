@@ -19,7 +19,7 @@ LIBSDIR=libs/
 LIBSPATH =$(addprefix $(LIBSDIR), $(LIBS))
 SRCDIR=srcs/
 CC = gcc
-CFLAGS = -fsanitize=address -g
+CFLAGS = 
 MAIN =main.c
 FILES =strerror_manager.c errors_parser.c info_player.c read_sogp.c \
 	   init_variables.c get_piece.c piece_size.c fill_map.c
