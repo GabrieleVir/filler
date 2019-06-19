@@ -29,7 +29,9 @@ typedef struct			s_parser
 typedef struct			s_filler_info
 {
 	char				*sogm;
+	char				*csogm;
 	char				*sogp;
+	char				*csogp;
 	int					player_number;
 	int					nb_rows;
 	int					nb_cols;
@@ -38,7 +40,6 @@ typedef struct			s_filler_info
 	int					p_width;
 	int					p_height;
 	int					pos;
-	int					contact_pos[2];
 	int					return_values[2];
 	char				player_char;
 }						t_filler_info;
@@ -46,10 +47,18 @@ typedef struct			s_filler_info
 typedef struct			s_place
 {
 	int					i;
-	int					piece_i;
-	int					x;
-	int					y;
+	int					pos;
+	int					posf;
+	int					contact;
+	int					result;
 }						t_place;
+
+
+/*
+** listener.c
+*/
+
+int						vm_listener(t_parser **parser, t_filler_info **info);
 
 
 /*
@@ -68,7 +77,7 @@ int						init_variables(t_parser **p, t_filler_info **i);
 /*
 ** read_sogp.c
 */
-int						read_sogp(t_parser **parser, t_filler_info **info);
+int						read_sogm(t_parser **parser, t_filler_info **info);
 /*
 ** get_piece.c
 */
@@ -82,5 +91,10 @@ void					get_real_width_height_piece(t_filler_info **info);
 ** fill_map.c
 */
 int						fill_map(t_filler_info **info, t_parser **parser);
+
+/*
+** fill_lbl.c
+*/
+int						fill_lbl(t_filler_info **info, t_parser **parser);
 
 #endif

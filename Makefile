@@ -6,7 +6,7 @@
 #    By: gvirga <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/12 23:31:55 by gvirga            #+#    #+#              #
-#    Updated: 2019/06/07 22:40:56 by gvirga           ###   ########.fr        #
+#    Updated: 2019/06/18 06:19:20 by gvirga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,12 @@ LIBS =libft.a
 LIBSDIR=libs/
 LIBSPATH =$(addprefix $(LIBSDIR), $(LIBS))
 SRCDIR=srcs/
-CC = gcc
-CFLAGS = 
+CC = gcc 
+CFLAGS = -fsanitize=address 
 MAIN =main.c
-FILES =strerror_manager.c errors_parser.c info_player.c read_sogp.c \
-	   init_variables.c get_piece.c piece_size.c fill_map.c
+FILES =strerror_manager.c errors_parser.c info_player.c read_sogm.c \
+	   init_variables.c get_piece.c piece_size.c fill_map.c 		\
+	   listener.c fill_lbl.c
 SRCFILES =$(addprefix $(SRCDIR), $(FILES))
 OBJ=$(subst .c,.o, $(FILES)) main.o
 SRCOBJ =$(addprefix $(SRCDIR), $(OBJ))

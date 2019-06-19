@@ -34,59 +34,45 @@ static int		get_piece_info(t_parser **parser, t_filler_info **info)
 	return (1);
 }
 
-/*
-** To get the good coordinates for later I have to remove the /n
-*/
-static int		piece_no_newline(t_filler_info **info, t_parser **parser)
+static int		malloc_sogp(t_filler_info **info, t_parser **parser)
 {
-	char	*tmp;
-	int		i;
-	int		u;
-
-	u = -1;
-	i = 0;
-	if (!(tmp = ft_strdup((*info)->sogp)))
-		return (0);
 	free((*info)->sogp);
-	(*info)->sogp = NULL;
-	(*info)->sogp = ft_strnew((*info)->piece_cols * (*info)->piece_rows);
-	if (!(*info)->sogp)
-		return (0);
-	while (tmp[++u])
-	{
-		if (tmp[u] == '*' || tmp[u] == '.')
-		{
-			((*info)->sogp)[i] = tmp[u];
-			i++;
-		}
-	}
-	free(tmp);
+	if (!((*info)->sogp = ft_strnew((*info)->piece_rows * (*info)->piece_cols)))
+		return (error_info_malloc(12, parser, NULL));
 	return (1);
+}
+
+static void		fill_sogp(t_filler_info **info, t_parser **parser, int *u)
+{
+	int			i;
+
+	i = -1;
+	while (((*parser)->line)[++i])
+	{
+		if (((*parser)->line)[i] == '.' || ((*parser)->line)[i] == '*')
+			((*info)->sogp)[++(*u)] = ((*parser)->line)[i];
+	}
 }
 
 int				get_piece(t_parser **parser, t_filler_info **info)
 {
+	int		u;
+
+	u = -1;
 	(*parser)->i = -1;
-	if (get_piece_info(parser, info))
+	if (get_piece_info(parser, info) && malloc_sogp(info, parser))
 	{
-		if ((*info)->sogp == NULL)
-			(*info)->sogp = ft_strnew(0);
 		while (++((*parser)->i) < (*info)->piece_rows)
 		{
-			get_next_line(STDIN_FILENO, &((*parser)->line));
-			if (!((*parser)->line))
-				return (error_info_malloc(0, parser, "Memory: get_piece GNL"));
-			(*info)->sogp =
-				ft_strjoin_free((*info)->sogp, (*parser)->line, 3);
-			(*info)->sogp = ft_strjoin_free((*info)->sogp, "\n", 1);
-			if ((*info)->sogp == NULL)
+			if (!(get_next_line(STDIN_FILENO, &((*parser)->line))))
 				return (error_info_malloc(12, parser, NULL));
+			fill_sogp(info, parser, &u);
+			free((*parser)->line);
+			(*parser)->line = NULL;
 		}
 	}
 	else
 		return (error_info_malloc(0, parser, "Get_piece() returned a error"));
-	if (!piece_no_newline(info, parser))
-		return (error_info_malloc(0, parser, "Memory: piece_no_newline"));
-	get_real_width_height_piece(info);
+	//get_real_width_height_piece(info);
 	return (1);
 }

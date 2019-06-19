@@ -10,52 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "filler.h"
+
+/*
+** The main will init the struct variables and
+** launch an infinite loop and there are 3 things it does in this loop:
+** 1) The first time it runs, it will put all the info necessary for the
+** rest of the program (player 1 or player 2, player_char, char * to NULL)
+** 2) Loop to see if there is the "Plateau" or "Piece" line and then get
+** all the infos like the sogm (State of Game map) necessary to play
+** 3) Launching the algorithm that will find good positions to give back
+** to the vm and apply the different strategies.
+*/
 
 int		main(void)
 {
 	t_parser		*parser;
 	t_filler_info	*info;
 
-	// for debugging
 	init_variables(&parser, &info);
 	while (1)
 	{
-		// parsing first
 		if (!info_player(&parser, &info))
-			return (-1);
-		// read state of game part
-		while ((parser->ret =
-					get_next_line(STDIN_FILENO, &(parser->line))) > 0)
 		{
-			if (ft_strncmp(parser->line, "Plateau ", 8) == 0)
-				read_sogp(&parser, &info);
-			else if (ft_strncmp(parser->line, "Piece ", 6) == 0)
-			{
-				if (!get_piece(&parser, &info))
-					return (-1);
-				break ;
-			}
-			else
-				free(parser->line);
+			break ;
 		}
-		if (parser->ret <= 0)
-			return (-1);
+		if (!vm_listener(&parser, &info))
+		{
+			break ;
+		}
+		if (parser->ret < 0)
+		{
+			break ;
+		}
 		if (!fill_map(&info, &parser))
-			return (-1);
-		free((info)->sogp);
-		free((info)->sogm);
-		info->sogp = NULL;
-		info->sogm = NULL;
-// debug
-	//	write(parser->fd, parser->line, ft_strlen(parser->line));
-	//	write(parser->fd, "\n", 1);
-		// algo
-//		choose_strat(map, piece);
-		// response to vm
-//		free(parser->line);
-//		parser->line = NULL;*/
+			break ;
 	}
+	free(info->sogm);
+	free(info->sogp);
 	return (0);
 }

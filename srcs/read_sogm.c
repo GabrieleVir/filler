@@ -36,73 +36,59 @@ static int		get_plateau_size(t_filler_info **info, t_parser **parser)
 {
 	if ((*parser)->first_time && (*parser)->ret > 0)
 	{
-		if (*((*parser)->line))
-		{
-			if (check_format(parser, info) != 1)
-				return (error_free_line(parser));
-		}
-		(*parser)->first_time = 0;
+		if (check_format(parser, info) != 1)
+			return (error_free_line(parser));
+		if (!((*info)->sogm = ft_strnew((*info)->nb_rows * (*info)->nb_cols)))
+			return (error_info_malloc(12, parser, NULL));
 		free(((*parser)->line));
+		(*parser)->line = NULL;
+		(*parser)->first_time = 0;
 		return (1);
 	}
 	if ((*parser)->ret <= 0)
 		return (error_msg_fd(12, (*parser)->fd));
 	free(((*parser)->line));
+	(*parser)->line = NULL;
 	return (1);
 }
 
-/*
-** To get the good coordinates when I ll try to place a piece
-*/
-
-static int		get_plat_right(t_filler_info **info, t_parser **parser)
+static void		fill_sogm(t_filler_info **info, t_parser **parser, int *u)
 {
-	char	*tmp;
+	int			i;
+
+	i = -1;
+	while (((*parser)->line)[++i])
+	{
+		if (((*parser)->line)[i] == '.' || ((*parser)->line)[i] == 'O' ||
+				((*parser)->line)[i] == 'X' ||
+				((*parser)->line)[i] == 'x' || ((*parser)->line)[i] == 'o')
+		{
+			if (*u >= (*info)->nb_cols * (*info)->nb_rows)
+				return ;
+			((*info)->sogm)[++(*u)] = ((*parser)->line)[i];
+		}
+	}
+}
+
+int				read_sogm(t_parser **parser, t_filler_info **info)
+{
 	int		u;
 
 	u = -1;
-	if (!(tmp = ft_strdup((*info)->sogm)))
-		return (0);
-	free((*info)->sogm);
-	(*info)->sogm = NULL;
-	(*info)->sogm = ft_strnew((*info)->nb_rows * (*info)->nb_cols);
-	if (!(*info)->sogm)
-		return (0);
-	(*parser)->i = 0;
-	while (tmp[++u])
-	{
-		if (tmp[u] == '.' || tmp[u] == 'x' || tmp[u] == 'X' || tmp[u] == 'O' ||
-			tmp[u] == 'o')
-		{
-			((*info)->sogm)[(*parser)->i] = tmp[u];
-			(*parser)->i += 1;
-		}
-	}
-	free(tmp);
-	return (1);
-}
-
-int				read_sogp(t_parser **parser, t_filler_info **info)
-{
 	(*parser)->i = -1;
 	if (get_plateau_size(info, parser))
 	{
-		if ((*info)->sogm == NULL)
-			(*info)->sogm = ft_strnew(0);
-		while (++((*parser)->i) < (*info)->nb_rows + 1)
+		while (++((*parser)->i) <= (*info)->nb_rows)
 		{
-			get_next_line(STDIN_FILENO, &((*parser)->line));
-			if (!((*parser)->line))
+			if (!(get_next_line(STDIN_FILENO, &((*parser)->line))))
 				return (error_info_malloc(12, parser, NULL));
-			(*info)->sogm =
-				ft_strjoin_free((*info)->sogm, (*parser)->line, 3);
-			(*info)->sogm = ft_strjoin_free((*info)->sogm, "\n", 1);
-			if ((*info)->sogm == NULL)
-				return (error_info_malloc(12, parser, NULL));
+			fill_sogm(info, parser, &u);
+			free((*parser)->line);
+			(*parser)->line = NULL;
 		}
-		if (!get_plat_right(info, parser))
-			return (error_info_malloc(0, parser, "Memory: get_plat_right"));
-		//ft_putstr_fd((*info)->sogm, (*parser)->fd);
+		if (u >= (*info)->nb_cols * (*info)->nb_rows)
+			return (0);
+		((*info)->sogm)[++u] = '\0';
 	}
 	else
 		return (error_info_malloc(0, parser,

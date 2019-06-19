@@ -21,7 +21,7 @@ int		init_variables(t_parser **parser, t_filler_info **info)
 	if (!(*info = (t_filler_info*)malloc(sizeof(t_filler_info))))
 		return (error_info_malloc(12, parser, NULL));
 	(*info)->sogm = NULL;
-	(*info)->sogp = NULL;
+	(*info)->sogp = ft_strnew(0);
 	(*info)->player_number = 0;
 	return (1);
 }

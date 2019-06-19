@@ -27,18 +27,18 @@ static int		check_first_line(t_parser **parser, t_filler_info **info)
 		{
 			(*info)->player_number = 1;
 			(*info)->player_char = 'O';
-			return (1);
 		}
 		else if (!(ft_strncmp((*parser)->line, "$$$ exec p2 : [", 15)))
 		{
 			(*info)->player_number = 2;
 			(*info)->player_char = 'X';
-			return (1);
 		}
+		else
+			return (0);
 	}
 	free((*parser)->line);
 	(*parser)->line = NULL;
-	return (0);
+	return (1);
 }
 
 int		info_player(t_parser **parser, t_filler_info **info)
