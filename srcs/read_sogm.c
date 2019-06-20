@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:21:38 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/07 22:23:55 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/19 20:36:00 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ int				read_sogm(t_parser **parser, t_filler_info **info)
 		((*info)->sogm)[++u] = '\0';
 	}
 	else
+	{
 		return (error_info_malloc(0, parser,
 					"Get_plateau_size() returned a error"));
+	}
 	return (1);
 }

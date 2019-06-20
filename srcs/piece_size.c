@@ -102,5 +102,5 @@ void		get_real_width_height_piece(t_filler_info **info)
 
 	i = 0;
 	get_height(i, info);
-	//get_width(i, info);
+	get_width(i, info);
 }

@@ -73,6 +73,6 @@ int				get_piece(t_parser **parser, t_filler_info **info)
 	}
 	else
 		return (error_info_malloc(0, parser, "Get_piece() returned a error"));
-	//get_real_width_height_piece(info);
+	get_real_width_height_piece(info);
 	return (1);
 }

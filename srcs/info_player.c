@@ -41,7 +41,7 @@ static int		check_first_line(t_parser **parser, t_filler_info **info)
 	return (1);
 }
 
-int		info_player(t_parser **parser, t_filler_info **info)
+int				info_player(t_parser **parser, t_filler_info **info)
 {
 	if ((*parser)->first_time)
 	{

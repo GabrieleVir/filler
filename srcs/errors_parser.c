@@ -21,7 +21,7 @@ int		error_info_malloc(int err_nb, t_parser **parser, char *err_str)
 		if (*parser)
 			error_str_fd(err_str, (*parser)->fd);
 	}
-	// free(*parser);
+	free(*parser);
 	return (0);
 }
 
