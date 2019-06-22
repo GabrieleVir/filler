@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:09:27 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/22 20:11:11 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 00:39:49 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 typedef struct		s_sog
 {
-	char			**map;
+	char			*sogm;
 	char			player_char[2];
-	int				width;
-	int				height;
+	int				nb_cols;
+	int				nb_rows;
 	int				enemy_x;
 	int				enemy_y;
 	int				my_x;
@@ -28,6 +28,7 @@ typedef struct		s_sog
 	int				init_x;
 	int				init_y;
 	int				len_line;
+	int				first_time;
 	char			*ret;
 }					t_sog;
 
@@ -38,9 +39,9 @@ typedef struct		s_piece
 	int				contact;
 	int				final_x;
 	int				final_y;
-	char			**piece;
-	int				width;
-	int				height;
+	char			*sogp;
+	int				piece_rows;
+	int				piece_cols;
 	int				real_width;
 	int				real_height;
 	int				init_x;
@@ -54,4 +55,29 @@ typedef struct		s_piece
 */
 
 int					init_variables(t_sog **map, t_piece **piece);
+
+/*
+** info_player.c
+*/
+
+int					info_player(t_sog **map, t_piece **piece);
+
+/*
+** turn_to_play.c
+*/
+
+int					turn_to_play(t_sog **map, t_piece **p);
+
+/*
+**	play.c
+*/
+int					play(t_sog **map, t_piece **p);
+
+/*
+** small_map.c
+*/
+
+int					small_map(t_sog **map, t_piece **p);
+
+
 #endif
