@@ -51,6 +51,7 @@ typedef struct			s_place
 	int					posf;
 	int					contact;
 	int					result;
+	int					target;
 }						t_place;
 
 
