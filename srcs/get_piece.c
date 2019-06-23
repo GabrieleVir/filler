@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 00:10:43 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 04:10:21 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 09:01:07 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ static void	get_real_width_height_piece(t_piece **p)
 	(*p)->init_y = (*p)->piece_rows;
 	while ((*p)->sogp[++i])
 	{
-			if ((*p)->sogp[i] == '*')
-			{
-				if (i % (*p)->piece_cols < (*p)->init_x)
-					(*p)->init_x = i % (*p)->piece_cols;
-				if (i % (*p)->piece_cols > (*p)->end_x)
-					(*p)->end_x = i % (*p)->piece_cols;
-				if (i / (*p)->piece_cols < (*p)->init_y)
-					(*p)->init_y = i / (*p)->piece_cols;
-				if (i / (*p)->piece_cols > (*p)->end_y)
-					(*p)->end_y = i / (*p)->piece_cols;
-			}
+		if ((*p)->sogp[i] == '*')
+		{
+			if (i % (*p)->piece_cols < (*p)->init_x)
+				(*p)->init_x = i % (*p)->piece_cols;
+			if (i % (*p)->piece_cols > (*p)->end_x)
+				(*p)->end_x = i % (*p)->piece_cols;
+			if (i / (*p)->piece_cols < (*p)->init_y)
+				(*p)->init_y = i / (*p)->piece_cols;
+			if (i / (*p)->piece_cols > (*p)->end_y)
+				(*p)->end_y = i / (*p)->piece_cols;
+		}
 	}
 	(*p)->real_width = ((*p)->end_x - (*p)->init_x) + 1;
 	(*p)->real_height = ((*p)->end_y - (*p)->init_y) + 1;

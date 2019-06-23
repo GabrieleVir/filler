@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:09:27 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 05:55:00 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 09:44:09 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,22 @@ typedef struct		s_place
 {
 	int				i;
 	int				pos;
+	char			pos_c;
 }					t_place;
+
+typedef struct		s_contact
+{
+	char			p1;
+	char			p2;
+	char			p1_2;
+	char			p2_2;
+	char			curr_c;
+	char			dc;
+	char			rc;
+	char			lc;
+	char			uc;
+}					t_contact;
+
 
 /*
 ** init_variables.c
@@ -69,6 +84,8 @@ int					init_variables(t_sog **map, t_piece **piece);
 */
 
 int					info_player(t_sog **map, t_piece **piece);
+void				get_info_players_on_map(t_sog **map);
+
 
 /*
 ** turn_to_play.c
@@ -95,14 +112,14 @@ int					is_placable(int i, int i2, t_sog **map, t_piece **p);
 void				print_result(t_piece **p, t_sog **map);
 
 /*
-** algo_down.c
+** sm_algo_down.c
 */
 
 int					algo_dr(t_sog **map, t_piece **p);
 int					algo_dl(t_sog **map, t_piece **p);
 
 /*
-** algo_up.c
+** sm_algo_up.c
 */
 
 int					algo_ul(t_sog **map, t_piece **p);
@@ -114,5 +131,10 @@ int					algo_ur(t_sog **map, t_piece **p);
 
 int					get_piece(char **line, t_piece **p);
 
+/*
+** big_map.c
+*/
+
+int					big_map(t_sog **map, t_piece **p);
 
 #endif

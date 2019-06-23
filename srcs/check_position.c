@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 02:36:11 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 08:27:35 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 09:22:23 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int		is_placable2(t_piece **p, int i, int i2)
 	return (1);
 }
 
-
 int				is_placable(int i, int i2, t_sog **map, t_piece **p)
 {
 	t_place	c;
@@ -38,13 +37,14 @@ int				is_placable(int i, int i2, t_sog **map, t_piece **p)
 		c.pos = i2 + (c.i % (*p)->piece_cols) +
 					((i + (c.i / (*p)->piece_cols))
 						* (*map)->nb_cols);
+		c.pos_c = (*map)->sogm[c.pos];
 		if ((*p)->sogp[c.i] == '*' &&
-			((*map)->sogm[c.pos] == (*map)->player_char[1] ||
-			((*map)->sogm[c.pos] != '.' &&
-				(*map)->sogm[c.pos] != (*map)->player_char[0])))
+			(c.pos_c == (*map)->player_char[1] ||
+			(c.pos_c != '.' && c.pos_c !=
+			(*map)->player_char[0] && c.pos_c != (*map)->player_char[0] + 32)))
 			return (1);
 		if ((*p)->sogp[c.i] == '*' &&
-				(*map)->sogm[c.pos] == (*map)->player_char[0])
+				c.pos_c == (*map)->player_char[0])
 			(*p)->contact++;
 	}
 	if (is_placable2(p, i, i2) == 0)
@@ -54,7 +54,6 @@ int				is_placable(int i, int i2, t_sog **map, t_piece **p)
 
 void			print_result(t_piece **p, t_sog **map)
 {
-	dprintf((*p)->fd, "x: %d\n y: %d\n", (*p)->return_x, (*p)->return_y);
 	ft_putnbr((*p)->return_y);
 	ft_putchar(' ');
 	ft_putnbr((*p)->return_x);

@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:37:17 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 04:10:40 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 09:02:50 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,29 @@ static int		check_first_line(t_sog **map)
 		return (0);
 	free(line);
 	return (1);
+}
+
+void			get_info_players_on_map(t_sog **map)
+{
+	int		i;
+
+	if (!(*map)->first_time)
+		return ;
+	i = -1;
+	while ((*map)->sogm[++i])
+	{
+		if ((*map)->sogm[i] == (*map)->player_char[0])
+		{
+			(*map)->my_x = i % (*map)->nb_cols;
+			(*map)->my_y = i / (*map)->nb_cols;
+		}
+		if ((*map)->sogm[i] == (*map)->player_char[1])
+		{
+			(*map)->enemy_x = i % (*map)->nb_cols;
+			(*map)->enemy_y = i / (*map)->nb_cols;
+		}
+	}
+	(*map)->first_time = 0;
 }
 
 int				info_player(t_sog **map, t_piece **piece)

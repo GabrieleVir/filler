@@ -6,7 +6,7 @@
 #    By: gvirga <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/12 23:31:55 by gvirga            #+#    #+#              #
-#    Updated: 2019/06/23 05:04:46 by gvirga           ###   ########.fr        #
+#    Updated: 2019/06/23 09:03:04 by gvirga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCDIR=srcs/
 CC = gcc 
 CFLAGS = 
 MAIN =main.c
-FILES =algo_down.c algo_up.c check_position.c get_piece.c init_player.c \
+FILES =sm_algo_down.c sm_algo_up.c check_position.c get_piece.c info_player.c \
 	   init_variables.c play.c small_map.c turn_to_play.c
 SRCFILES =$(addprefix $(SRCDIR), $(FILES))
 OBJ=$(subst .c,.o, $(FILES)) main.o

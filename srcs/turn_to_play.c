@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 21:48:51 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 08:10:10 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 09:08:30 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,7 @@ static void		fill_sogm(char *line, t_sog **map, int *u)
 	}
 }
 
-static void	get_info_players(t_sog **map)
-{
-	int		i;
-
-	if (!(*map)->first_time)
-		return ;
-	i = -1;
-	while ((*map)->sogm[++i])
-	{
-		if ((*map)->sogm[i] == (*map)->player_char[0])
-		{
-			(*map)->my_x = i % (*map)->nb_cols;
-			(*map)->my_y = i / (*map)->nb_cols;
-		}
-		if ((*map)->sogm[i] == (*map)->player_char[1])
-		{
-			(*map)->enemy_x = i % (*map)->nb_cols;
-			(*map)->enemy_y = i / (*map)->nb_cols;
-		}
-	}
-	(*map)->first_time = 0;
-}
-
-static int	get_map(t_sog **map)
+static int		get_map(t_sog **map)
 {
 	int		i;
 	char	*line;
@@ -92,11 +69,11 @@ static int	get_map(t_sog **map)
 	if (u >= (*map)->nb_cols * (*map)->nb_rows)
 		return (0);
 	((*map)->sogm)[u] = '\0';
-	get_info_players(map);
+	get_info_players_on_map(map);
 	return (1);
 }
 
-static int	read_sogm(char **line, t_sog **map)
+static int		read_sogm(char **line, t_sog **map)
 {
 	if ((*map)->first_time)
 	{
@@ -111,7 +88,7 @@ static int	read_sogm(char **line, t_sog **map)
 	return (1);
 }
 
-int			turn_to_play(t_sog **map, t_piece **p)
+int				turn_to_play(t_sog **map, t_piece **p)
 {
 	char	*line;
 
@@ -131,5 +108,5 @@ int			turn_to_play(t_sog **map, t_piece **p)
 		else
 			ft_strdel(&line);
 	}
-    return (1);
+	return (1);
 }
