@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 21:48:51 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 04:13:42 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 08:10:10 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	get_info_players(t_sog **map)
 {
 	int		i;
 
+	if (!(*map)->first_time)
+		return ;
 	i = -1;
 	while ((*map)->sogm[++i])
 	{
@@ -68,6 +70,7 @@ static void	get_info_players(t_sog **map)
 			(*map)->enemy_y = i / (*map)->nb_cols;
 		}
 	}
+	(*map)->first_time = 0;
 }
 
 static int	get_map(t_sog **map)
@@ -84,6 +87,7 @@ static int	get_map(t_sog **map)
 			return (0);
 		fill_sogm(line, map, &u);
 		ft_strdel(&line);
+		i++;
 	}
 	if (u >= (*map)->nb_cols * (*map)->nb_rows)
 		return (0);
@@ -98,7 +102,8 @@ static int	read_sogm(char **line, t_sog **map)
 	{
 		if (check_format(map, *line) != 1)
 			return (0);
-		(*map)->first_time = 0;
+		if (!((*map)->sogm = ft_strnew((*map)->nb_rows * (*map)->nb_cols)))
+			return (0);
 	}
 	ft_strdel(line);
 	if (!(get_map(map)))

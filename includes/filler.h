@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:09:27 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 04:14:31 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 05:55:00 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FILLER_H
 
 # include "libft.h"
-
+# include <fcntl.h>
 typedef struct		s_sog
 {
 	char			*sogm;
@@ -49,11 +49,13 @@ typedef struct		s_piece
 	int				end_x;
 	int				init_y;
 	int				end_y;
+	int				fd;
 }					t_piece;
 
 typedef struct		s_place
 {
-	int				test;
+	int				i;
+	int				pos;
 }					t_place;
 
 /*
