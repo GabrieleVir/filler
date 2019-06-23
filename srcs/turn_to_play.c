@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 21:48:51 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 00:38:48 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 04:13:42 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	get_map(t_sog **map)
 	i = 0;
 	while (i <= (*map)->nb_rows)
 	{
-		if (!(get_next_line(STDIN_FILENO, &line)))
+		if (!(get_next_line(0, &line)))
 			return (0);
 		fill_sogm(line, map, &u);
 		ft_strdel(&line);
@@ -89,6 +89,7 @@ static int	get_map(t_sog **map)
 		return (0);
 	((*map)->sogm)[u] = '\0';
 	get_info_players(map);
+	return (1);
 }
 
 static int	read_sogm(char **line, t_sog **map)
@@ -109,7 +110,7 @@ int			turn_to_play(t_sog **map, t_piece **p)
 {
 	char	*line;
 
-	while (get_next_line(0, &line))) > 0)
+	while (get_next_line(0, &line) > 0)
 	{
 		if (ft_strncmp(line, "Plateau ", 8) == 0)
 		{

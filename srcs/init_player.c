@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:37:17 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/22 20:37:36 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 04:10:40 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		check_first_line(t_sog **map)
 		(*map)->player_char[0] = 'O';
 		(*map)->player_char[1] = 'X';
 	}
-	else if (!(ft_strncmp((*parser)->line, "$$$ exec p2 : [", 15)))
+	else if (!(ft_strncmp(line, "$$$ exec p2 : [", 15)))
 	{
 		(*map)->player_char[0] = 'X';
 		(*map)->player_char[1] = 'O';

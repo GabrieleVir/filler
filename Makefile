@@ -6,7 +6,7 @@
 #    By: gvirga <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/12 23:31:55 by gvirga            #+#    #+#              #
-#    Updated: 2019/06/18 06:19:20 by gvirga           ###   ########.fr        #
+#    Updated: 2019/06/23 02:49:04 by gvirga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,8 @@ SRCDIR=srcs/
 CC = gcc 
 CFLAGS = -fsanitize=address 
 MAIN =main.c
-FILES =strerror_manager.c errors_parser.c info_player.c read_sogm.c \
-	   init_variables.c get_piece.c piece_size.c fill_map.c 		\
-	   listener.c fill_lbl.c
+FILES =algo_down.c algo_up.c check_position.c get_piece.c init_player.c \
+	   init_variables.c play.c small_map.c turn_to_play.c
 SRCFILES =$(addprefix $(SRCDIR), $(FILES))
 OBJ=$(subst .c,.o, $(FILES)) main.o
 SRCOBJ =$(addprefix $(SRCDIR), $(OBJ))
@@ -67,8 +66,6 @@ CYAN =\033[36m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	rm -f program.trace
-	touch program.trace
 	@echo "$(CYAN)Building the $(NAME) executable$(END)"
 	gcc $(CFLAGS) -o $@$(OBJ) $(LIBSPATH) $(FRAMEWORKS_CMD)
 	@echo "$(GREEN)SUCCESS$(END)"

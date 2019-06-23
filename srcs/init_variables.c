@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:02:37 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 00:32:28 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 04:12:57 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ int		init_variables(t_sog **map, t_piece **piece)
 	(*map)->my_x = 0;
 	(*map)->my_y = 0;
 	(*map)->first_time = 1;
-	(*p)->sogp = NULL;
-	(*p)->contact = 0;
-	(*p)->tmp_x = 0;
-	(*p)->tmp_y = 0;
-	(*p)->contact = 0;
-	(*p)->init_x = 0;
-	(*p)->end_x = 0;
-	(*p)->init_y = 0;
-	(*p)->end_y = 0;
+	(*piece)->sogp = NULL;
+	(*piece)->contact = 0;
+	(*piece)->tmp_x = 0;
+	(*piece)->tmp_y = 0;
+	(*piece)->contact = 0;
+	(*piece)->init_x = 0;
+	(*piece)->end_x = 0;
+	(*piece)->init_y = 0;
+	(*piece)->end_y = 0;
+	return (1);
 }

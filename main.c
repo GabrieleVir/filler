@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:00:42 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 00:34:00 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 02:47:48 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int		main(void)
 		if (turn_to_play(&map, &piece_info))
 		{
 			if (play(&map, &piece_info))
+			{
+
+			}
+			else
+				break ;
 		}
 	}
 	free(piece_info->sogp);

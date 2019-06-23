@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 00:10:43 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 00:33:33 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 04:10:21 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int			get_piece(char **line, t_piece **p)
 			if (!(get_next_line(0, line)))
 				return (0);
 			fill_sogp(line, p, &u);
-			ft_strdel(&line);
+			ft_strdel(line);
 		}
 	}
 	else
