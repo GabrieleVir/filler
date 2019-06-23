@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 10:07:36 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 12:57:14 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 14:53:07 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,10 @@ static void	check_adjacent_points(t_contact *in, t_piece **p, int u, t_sog **map
 				(u + (*in).x - (*in).around_i) > 0 && ((*in).i + (*in).y +
 				(*in).around_i) < (*map)->nb_rows && ((*in).i + (*in).y -
 				(*in).around_i) > 0)
-			if ((*map)->sogm[(*in).irc] == (*in).p2 ||
-					(*map)->sogm[(*in).irc] == (*in).p2_2
-			|| (*map)->sogm[(*in).ilc] == (*in).p2 ||
-					(*map)->sogm[(*in).ilc] == (*in).p2_2
-			|| (*map)->sogm[(*in).idc] == (*in).p2 ||
-					(*map)->sogm[(*in).idc] == (*in).p2_2
-			|| (*map)->sogm[(*in).iuc] == (*in).p2 ||
-					(*map)->sogm[(*in).iuc] == (*in).p2_2)
+			if ((*map)->sogm[(*in).irc] == (*in).p2 
+			|| (*map)->sogm[(*in).ilc] == (*in).p2 
+			|| (*map)->sogm[(*in).idc] == (*in).p2 
+			|| (*map)->sogm[(*in).iuc] == (*in).p2 )
 				(*p)->contact_counter += (4 - (*in).around_i);
 }
 
@@ -81,26 +77,27 @@ int		algo_approach(t_sog **map, t_piece **p)
 {
 	int	i;
 	int	i2;
+	int	contact_counter_tmp;
+	int	nbr_contact;
 
-	(*p)->around_contacts = -1;
+	nbr_contact = -1;
 	i = (*map)->nb_rows - ((*p)->piece_rows - (*p)->end_y);
 	(*p)->tmp_x = 0;
 	(*p)->tmp_y = 0;
-	(*p)->contact_counter = 0;
 	while (--i >= 0)
 	{
 		i2 = (*map)->nb_cols - ((*p)->piece_cols - (*p)->end_x);
 		while (--i2 >= 0)
 			if (is_placable(i, i2, map, p) == 0)
 			{
-				(*p)->contact_counter = count_contact(map, p, i, i2);
-				if ((*p)->contact_counter > (*p)->around_contacts)
+				contact_counter_tmp = count_contact(map, p, i, i2);
+				if (contact_counter_tmp > nbr_contact)
 				{
-					(*p)->around_contacts = (*p)->contact_counter;
+					nbr_contact = contact_counter_tmp;
 					(*p)->tmp_x = i2;
 					(*p)->tmp_y = i;
 				}
 			}
 	}
-	return (result_printing((*p)->around_contacts, p, map));
+	return (result_printing(nbr_contact, p, map));
 }
