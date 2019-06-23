@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 02:35:39 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 09:09:31 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 13:03:18 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int			algo_dr(t_sog **map, t_piece **p)
 	(*p)->return_x = 0;
 	(*p)->return_y = 0;
 	good_pos = 0;
-	while (++i < (*map)->nb_rows)
+	while (++i < (*map)->nb_rows - 1)
 	{
 		i2 = -1;
-		while (++i2 < (*map)->nb_cols)
+		while (++i2 < (*map)->nb_cols - 1)
 		{
 			good_pos = is_placable(i, i2, map, p);
 			if (good_pos == 0)

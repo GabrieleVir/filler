@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 00:43:46 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 09:06:10 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 13:03:39 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int		algo_ul(t_sog **map, t_piece **p)
 	int	i2;
 	int	good_pos;
 
-	i = (*map)->nb_rows;
+	i = (*map)->nb_rows - 1;
 	(*p)->return_x = 0;
 	(*p)->return_y = 0;
 	good_pos = 0;
 	while (i > 0)
 	{
-		i2 = (*map)->nb_cols;
+		i2 = (*map)->nb_cols - 1;
 		while (i2 > 0)
 		{
 			good_pos = is_placable(i, i2, map, p);

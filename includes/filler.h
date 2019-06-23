@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:09:27 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 09:44:09 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 12:58:29 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_piece
 	int				tmp_y;
 	int				contact;
 	int				around_contacts;
+	int				contact_counter;
 	int				return_x;
 	int				return_y;
 	char			*sogp;
@@ -49,6 +50,8 @@ typedef struct		s_piece
 	int				end_x;
 	int				init_y;
 	int				end_y;
+	int				near_contact;
+	/* To remove */
 	int				fd;
 }					t_piece;
 
@@ -70,6 +73,14 @@ typedef struct		s_contact
 	char			rc;
 	char			lc;
 	char			uc;
+	int				idc;
+	int				irc;
+	int				ilc;
+	int				iuc;
+	int				x;
+	int				y;
+	int				i;
+	int				around_i;
 }					t_contact;
 
 
@@ -136,5 +147,18 @@ int					get_piece(char **line, t_piece **p);
 */
 
 int					big_map(t_sog **map, t_piece **p);
+
+/*
+** bm_algo.c
+*/
+
+int					algo_approach(t_sog **map, t_piece **p);
+
+/*
+** bm_algo.c
+*/
+
+
+void				get_contact(t_piece **p, t_sog **map);
 
 #endif

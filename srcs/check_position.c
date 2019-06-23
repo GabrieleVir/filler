@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 02:36:11 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 09:22:23 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/23 13:07:41 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int				is_placable(int i, int i2, t_sog **map, t_piece **p)
 					((i + (c.i / (*p)->piece_cols))
 						* (*map)->nb_cols);
 		c.pos_c = (*map)->sogm[c.pos];
-		if ((*p)->sogp[c.i] == '*' &&
-			(c.pos_c == (*map)->player_char[1] ||
-			(c.pos_c != '.' && c.pos_c !=
+		if ((*p)->sogp[c.i] == '*' && (
+			(c.pos_c == (*map)->player_char[1] || c.pos_c ==
+			(*map)->player_char[1] + 32) || (c.pos_c != '.' && c.pos_c !=
 			(*map)->player_char[0] && c.pos_c != (*map)->player_char[0] + 32)))
 			return (1);
 		if ((*p)->sogp[c.i] == '*' &&
