@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:00:42 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 07:56:04 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/26 05:17:45 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int		last_try(t_sog **map, t_piece **p)
 	return (1);
 }
 
-int		main(void)
+int				main(void)
 {
 	t_sog	*map;
 	t_piece	*piece_info;
@@ -46,7 +46,6 @@ int		main(void)
 	if (!(init_variables(&map, &piece_info)) ||
 				!(info_player(&map, &piece_info)))
 		return (0);
-	piece_info->fd = open("test.trace", O_WRONLY);
 	while (1)
 	{
 		if (turn_to_play(&map, &piece_info))

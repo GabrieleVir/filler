@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 20:09:27 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 12:58:29 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/26 05:18:36 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FILLER_H
 
 # include "libft.h"
-# include <fcntl.h>
+
 typedef struct		s_sog
 {
 	char			*sogm;
@@ -25,11 +25,8 @@ typedef struct		s_sog
 	int				enemy_y;
 	int				my_x;
 	int				my_y;
-	int				init_x;
-	int				init_y;
 	int				len_line;
 	int				first_time;
-	char			*ret;
 }					t_sog;
 
 typedef struct		s_piece
@@ -44,15 +41,11 @@ typedef struct		s_piece
 	char			*sogp;
 	int				piece_rows;
 	int				piece_cols;
-	int				real_width;
-	int				real_height;
 	int				init_x;
 	int				end_x;
 	int				init_y;
 	int				end_y;
 	int				near_contact;
-	/* To remove */
-	int				fd;
 }					t_piece;
 
 typedef struct		s_place
@@ -83,7 +76,6 @@ typedef struct		s_contact
 	int				around_i;
 }					t_contact;
 
-
 /*
 ** init_variables.c
 */
@@ -96,7 +88,6 @@ int					init_variables(t_sog **map, t_piece **piece);
 
 int					info_player(t_sog **map, t_piece **piece);
 void				get_info_players_on_map(t_sog **map);
-
 
 /*
 ** turn_to_play.c
@@ -152,12 +143,11 @@ int					big_map(t_sog **map, t_piece **p);
 ** bm_algo.c
 */
 
-int					algo_approach(t_sog **map, t_piece **p);
+int					algo_circle(t_sog **map, t_piece **p);
 
 /*
 ** bm_algo.c
 */
-
 
 void				get_contact(t_piece **p, t_sog **map);
 

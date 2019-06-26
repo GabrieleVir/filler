@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 00:10:43 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/23 09:01:07 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/25 04:55:06 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ static void	get_real_width_height_piece(t_piece **p)
 				(*p)->end_y = i / (*p)->piece_cols;
 		}
 	}
-	(*p)->real_width = ((*p)->end_x - (*p)->init_x) + 1;
-	(*p)->real_height = ((*p)->end_y - (*p)->init_y) + 1;
 }
 
 int			get_piece(char **line, t_piece **p)
