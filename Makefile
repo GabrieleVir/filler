@@ -6,7 +6,7 @@
 #    By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/12 23:31:55 by gvirga            #+#    #+#              #
-#    Updated: 2019/06/26 05:46:39 by gvirga           ###   ########.fr        #
+#    Updated: 2019/06/26 07:22:29 by gvirga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,28 +31,28 @@ INC_DIR =./includes/
 LFLAGS =rc
 FRAMEWORKS=
 FRAMEWORKS_CMD=$(addprefix -framework , $(FRAMEWORKS))
-OBJ2=ft_putchar.o ft_putchar_fd.o ft_putstr.o ft_putstr_fd.o ft_putendl.o \
-ft_putendl_fd.o ft_memcpy.o ft_putwchar.o ft_putwstr.o \
+FILES2=ft_putchar.c ft_putchar_fd.c ft_putstr.c ft_putstr_fd.c ft_putendl.c \
+ft_putendl_fd.c ft_memcpy.c ft_putwchar.c ft_putwstr.c \
 \
-ft_memccpy.o ft_memset.o ft_bzero.o ft_memmove.o \
-ft_memchr.o ft_memcmp.o ft_strlen.o ft_strdup.o \
-ft_strcpy.o ft_strncpy.o ft_strtrim.o ft_strsplit.o \
-ft_strcat.o ft_strncat.o ft_strlcat.o ft_strstr.o ft_strdup.o ft_strcpy.o \
-ft_strncpy.o ft_strchri.o ft_isdigit.o ft_putnbr.o ft_putnbr_fd.o ft_strchr.o \
-ft_strrchr.o ft_strnstr.o ft_strcmp.o ft_strncmp.o \
-ft_strnew.o ft_strdel.o ft_strclr.o ft_striter.o ft_striteri.o ft_strnjoin.o \
-ft_strmap.o ft_strmapi.o ft_strequ.o ft_strnequ.o ft_strsub.o ft_strjoin.o \
+ft_memccpy.c ft_memset.c ft_bzero.c ft_memmove.c \
+ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c \
+ft_strcpy.c ft_strncpy.c ft_strtrim.c ft_strsplit.c \
+ft_strcat.c ft_strncat.c ft_strlcat.c ft_strstr.c \
+ft_strchri.c ft_isdigit.c ft_putnbr.c ft_putnbr_fd.c ft_strchr.c \
+ft_strrchr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
+ft_strnew.c ft_strdel.c ft_strclr.c ft_striter.c ft_striteri.c ft_strnjoin.c \
+ft_strmap.c ft_strmapi.c ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c \
 \
-ft_atoi.o ft_isalpha.o ft_isalnum.o ft_ispowerof2.o\
-ft_isascii.o ft_isprint.o ft_toupper.o ft_tolower.o ft_memalloc.o ft_itoa.o \
-ft_memdel.o ft_lstnew.o ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_itoa_base.o \
-ft_lstiter.o ft_lstmap.o ft_lstcpy.o ft_wordcount.o ft_atol.o ft_push_back.o \
-ft_strnboccur.o ft_strjoin_free.o ft_ipower.o ft_npower.o ft_rchr.o \
-ft_nbdigit.o ft_strjoin_freei.o ft_strnew_free.o ft_strsub_free.o \
-ft_strdup_free.o ft_putlstr.o ft_memljoin.o ft_llnbdigit.o ft_bigpower.o \
-ft_ftoa.o ft_round_str_double.o get_next_line.o
-SRCOBJ2 =$(addprefix tmp_obj/, $(OBJ2))
-SRCFILES2 =$(subst .c, .o, $(SRCOBJ2))
+ft_atoi.c ft_isalpha.c ft_isalnum.c ft_ispowerof2.c\
+ft_isascii.c ft_isprint.c ft_toupper.c ft_tolower.c ft_memalloc.c ft_itoa.c \
+ft_memdel.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_itoa_base.c \
+ft_lstiter.c ft_lstmap.c ft_lstcpy.c ft_wordcount.c ft_atol.c ft_push_back.c \
+ft_strnboccur.c ft_strjoin_free.c ft_ipower.c ft_npower.c ft_rchr.c \
+ft_nbdigit.c ft_strjoin_freei.c ft_strnew_free.c ft_strsub_free.c \
+ft_strdup_free.c ft_putlstr.c ft_memljoin.c ft_llnbdigit.c ft_bigpower.c \
+ft_ftoa.c ft_round_str_double.c get_next_line.c
+SRCFILES2 =$(addprefix libft/srcs/, $(FILES2))
+SRCOBJ2 =$(subst .c, .o, $(SRCFILES2))
 
 RED=\033[0;31m
 YELLOW=\033[0;33m
@@ -71,13 +71,15 @@ $(NAME): $(OBJ)
 	gcc $(CFLAGS) -o $@$(OBJ) $(LIBSPATH) $(FRAMEWORKS_CMD)
 	@echo "$(GREEN)SUCCESS$(END)"
 
-$(OBJ): $(SRCFILES) $(MAIN)
+$(OBJ): $(SRCFILES) $(MAIN) $(SRCFILES2)
+	@echo "$(CYAN)Compilation of source files for $(NAME) executable...$(END)"
+	@$(CC) $(CFLAGS) $(MAIN) -c $(SRCFILES) -I $(INC_DIR)
+
+$(SRCFILES2):
 	@echo "$(YELLOW)Checking updates in the libs$(END)"
 	@make -C $(LIBFT_DIR)
 	@cp $(LIBFT_DIR)libft.a libs/
 	@cp $(LIBFT_DIR)/includes/libft.h $(INC_DIR)
-	@echo "$(CYAN)Compilation of source files for $(NAME) executable...$(END)"
-	@$(CC) $(CFLAGS) $(MAIN) -c $(SRCFILES) -I $(INC_DIR)
 
 clean:
 	@rm -Rf $(OBJ)
