@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 09:11:28 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/26 03:43:57 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/26 05:46:53 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,15 @@ static void	init_cont_var(t_contact *info, t_sog **map)
 static void	init_all_sides_chars(t_sog **map, t_contact *in, int i, int j)
 {
 	(*in).curr_c = (*map)->sogm[((i - 1) * (*map)->nb_cols) + j - 1];
-	if ((*in).curr_c == (*in).p1 || (*in).curr_c == (*in).p1_2)
+	if (i - 1 - 3 > 0 && i - 1 + 3 < (*map)->nb_rows)
 	{
-		(*in).uc = (*map)->sogm[((i - 1 - 3) * (*map)->nb_cols) + j - 1];
-		(*in).rc = (*map)->sogm[((i - 1) * (*map)->nb_cols) + j + 3 - 1];
-		(*in).dc = (*map)->sogm[((i - 1 + 3) * (*map)->nb_cols) + j];
-		(*in).lc = (*map)->sogm[((i - 1) * (*map)->nb_cols) + j - 3 - 1];
+		if ((*in).curr_c == (*in).p1 || (*in).curr_c == (*in).p1_2)
+		{
+			(*in).uc = (*map)->sogm[((i - 1 - 3) * (*map)->nb_cols) + j - 1];
+			(*in).rc = (*map)->sogm[((i - 1) * (*map)->nb_cols) + j + 3 - 1];
+			(*in).dc = (*map)->sogm[((i - 1 + 3) * (*map)->nb_cols) + j];
+			(*in).lc = (*map)->sogm[((i - 1) * (*map)->nb_cols) + j - 3 - 1];
+		}
 	}
 }
 
