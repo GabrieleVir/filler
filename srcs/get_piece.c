@@ -6,7 +6,7 @@
 /*   By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 00:10:43 by gvirga            #+#    #+#             */
-/*   Updated: 2019/06/25 04:55:06 by gvirga           ###   ########.fr       */
+/*   Updated: 2019/06/29 21:24:10 by gvirga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	fill_sogp(char **line, t_piece **p, int *u)
 static int	malloc_sogp(t_piece **p, char **line)
 {
 	if ((*p)->sogp != NULL)
-		free((*p)->sogp);
+		ft_strdel(&((*p)->sogp));
 	if (!((*p)->sogp = ft_strnew((*p)->piece_rows * (*p)->piece_cols)))
 		return (0);
 	return (1);
