@@ -6,7 +6,7 @@
 #    By: gvirga <gvirga@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/12 23:31:55 by gvirga            #+#    #+#              #
-#    Updated: 2019/06/26 07:22:29 by gvirga           ###   ########.fr        #
+#    Updated: 2019/06/30 14:00:22 by gvirga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBSDIR=libs/
 LIBSPATH =$(addprefix $(LIBSDIR), $(LIBS))
 SRCDIR=srcs/
 CC = gcc 
-CFLAGS = -fsanitize=address 
+CFLAGS = -O3
 MAIN =main.c
 FILES =sm_algo_down.c sm_algo_up.c check_position.c get_piece.c info_player.c \
 	   init_variables.c play.c small_map.c turn_to_play.c big_map.c bm_algo.c \
